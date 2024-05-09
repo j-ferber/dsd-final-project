@@ -23,8 +23,6 @@ To play the game, you will need the following attachments:
 - 16-button keypad module [(Pmod KYPD)](https://store.digilentinc.com/pmod-kypd-16-button-keypad/) connected to the Pmod port JA
 - VGA to HDMI Adapter
 
-## Videos and Images of Program Running
-
 ## How to Run
 
 Download the following files from this repository to your computer:
@@ -48,6 +46,28 @@ After downloading the files, follow these steps:
 2. Run synthesis
 3. Run implementation
 4. Generate bitstream, open hardware manager, and program device Click 'Generate Bitstream' Click 'Open Hardware Manager' and click 'Open Target' then 'Auto Connect' Click 'Program Device'
-5. Push BtNC, middle button, to serve the ball for pong
+5. Make sure the vga-sync and keypad module are hooked up to the Nexys board, or program will not work as expected
+6. Push BTNC, middle button, to serve the ball for pong
+
+## Input and Outputs
+
+Image of inputs and outputs to top level file, `pong_2.vhd`
+![image](https://github.com/j-ferber/dsd-final-project/assets/119906373/44bf4b1c-8d36-440c-b8be-c5bc7510cf4b)
+
+- clk_in: This input is the clock used for the system clock (1)
+- VGA_red, VGA_green, VGA_blue, VGA_hsync, VGA_vsync: All of these outputs are needed to display the code and colors on the screen (2)
+- btnl: This input corresponds to the top button used for the input of one of the bats (Input port M18) (3)
+- btnr: This input corresponds to the bottom button used for the input of one of the bats (Input port P18) (4)
+- btn0: This input corresponds to the middle button used to serve the ball (Input port N17) (5)
+- SEG7_anode: This output corresponds to the 8 different LED segments that could be lit up (6)
+- SEG7_seg: This output determines what will be displayed on each anode (1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F) (7)
+- KB_col, KB_row: These inputs are passed down to the `keypad.vhd` file to determine which key is currently being pressed on the keypad (8)
+- SW: This one switch input corresponds to the first switch on the left side of the Nexys board (Input port V10) (9)
+
+### PUT IMAGE WITH LABELS HERE
+
+## Videos and Images of Program Running
 
 ## Modifications
+
+## Summary
