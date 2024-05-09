@@ -14,11 +14,13 @@ ENTITY pong IS
         btnl : IN STD_LOGIC;
         btnr : IN STD_LOGIC;
         btn0 : IN STD_LOGIC;
+        Auto1 : IN STD_LOGIC;
+        Auto2 : IN STD_LOGIC;
+	    SW : IN STD_LOGIC_VECTOR (4 DOWNTO 0);
         SEG7_anode : OUT STD_LOGIC_VECTOR (7 DOWNTO 0); -- anodes of four 7-seg displays
         SEG7_seg : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
         KB_col : OUT STD_LOGIC_VECTOR (4 DOWNTO 1); -- keypad column pins
-	    KB_row : IN STD_LOGIC_VECTOR (4 DOWNTO 1); -- keypad row pins
-	    SW : IN STD_LOGIC
+	    KB_row : IN STD_LOGIC_VECTOR (4 DOWNTO 1) -- keypad row pins
     ); 
 END pong;
 
@@ -53,12 +55,14 @@ ARCHITECTURE Behavioral OF pong IS
             bat_y1 : IN STD_LOGIC_VECTOR (10 DOWNTO 0);
             bat_y2 : IN STD_LOGIC_VECTOR (10 DOWNTO 0);
             serve : IN STD_LOGIC;
+            Auto1 : IN STD_LOGIC;
+            Auto2 : IN STD_LOGIC;
+            SW : IN STD_LOGIC_VECTOR (4 DOWNTO 0);
             red : OUT STD_LOGIC;
             green : OUT STD_LOGIC;
             blue : OUT STD_LOGIC;
             p1Score: OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
-            p2Score: OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
-            SW : IN STD_LOGIC
+            p2Score: OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
         );
     END COMPONENT;
     COMPONENT vga_sync IS
@@ -97,15 +101,15 @@ BEGIN
     BEGIN
         if rising_edge(clk_in) then
             count <= count + 1;
-            IF (btnl = '1' and count = 0 and batpos1 > 0 and SW = '0') THEN
-                batpos1 <= batpos1 - 10;
-            ELSIF (btnr = '1' and count = 0 and batpos1 < 600 and SW = '0') THEN
-                batpos1 <= batpos1 + 10;
+            IF (btnl = '1' and count = 0 and batpos1 > 0 and Auto1 = '0') THEN
+                batpos1 <= batpos1 - 15;
+            ELSIF (btnr = '1' and count = 0 and batpos1 < 600 and Auto1 = '0') THEN
+                batpos1 <= batpos1 + 15;
             END IF;
-            IF (kp_hit = '1' and kp_value = "0001" and count = 0 and batpos2 > 0) THEN
-                batpos2 <= batpos2 - 10;
-            ELSIF (kp_hit = '1' and kp_value = "0111" and count = 0 and batpos2 < 600) THEN
-                batpos2 <= batpos2 + 10;
+            IF (kp_hit = '1' and kp_value = "0001" and count = 0 and batpos2 > 0 and Auto2 = '0') THEN
+                batpos2 <= batpos2 - 15;
+            ELSIF (kp_hit = '1' and kp_value = "0111" and count = 0 and batpos2 < 600 and Auto2 = '0') THEN
+                batpos2 <= batpos2 + 15;
             END IF;
         end if;
     END PROCESS;
@@ -119,12 +123,14 @@ BEGIN
         bat_y1 => batpos1,
         bat_y2 => batpos2, 
         serve => btn0, 
+        Auto1 => Auto1,
+        Auto2 => Auto2,
+        SW => SW,
         red => S_red, 
         green => S_green, 
         blue => S_blue,
         p1Score => display1,
-        p2Score => display2,
-        SW => SW
+        p2Score => display2
     );
     vga_driver : vga_sync
     PORT MAP(--instantiate vga_sync component
