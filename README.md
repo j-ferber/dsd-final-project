@@ -66,7 +66,7 @@ Image of inputs and outputs to top level file, `pong_2.vhd`
 - SEG7_seg: This output determines what will be displayed on each anode (1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F) (9)
 - KB_col, KB_row: These inputs are passed down to the `keypad.vhd` file to determine which key is currently being pressed on the keypad (10)
 
-### PUT IMAGE WITH LABELS HERE
+![20240509_213141](https://github.com/j-ferber/dsd-final-project/assets/119906373/21a3f75f-9ce7-4c7a-bbcf-0b667cfae1a7)
 
 ## Videos and Images of Program Running
 
