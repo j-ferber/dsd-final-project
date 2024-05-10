@@ -15,6 +15,8 @@ In **_Pong_**, you control one of the bats and keep the ball away from your side
   - Once you hit the middle button on the board, BTNC, the ball will be served
   - If you want to completely restart the game, just reprogram the device
 
+[**Final Demo**](https://drive.google.com/file/d/1RLsZzoS_b0czaERnS1VzRGOtFNlG38Rq/view?usp=sharing)
+
 ## Required Attachments
 
 To play the game, you will need the following attachments:
@@ -238,5 +240,32 @@ For the score display on the board, we edited the behavioral of the leddec16.vhd
 
 
 ## Process Summary
+
 ![image](https://github.com/j-ferber/dsd-final-project/assets/89234087/08970931-fbc5-49d1-9ae9-90984dd05187)
 
+**Components:**
+
+- Harris Pyo:
+  - Added second bat and bounce logic
+  - Added switches to control ball speed
+  - Added score for each player
+    - Edited scoring logic for each wall
+  - Contributed to GitHub repo
+- Justin Ferber:
+  - Added keypad to control second bat
+  - Added switches for computer modes
+  - Switched buttons to top and bottom
+  - Contributed to GitHub repo
+ 
+**Initial Problems:**
+
+- Making a second bat component
+  - First attempted to instantiate another bat and ball component for the second bat, but ran into problems with the vga_sync
+    - Instead, we decided to make another draw bat process in the `bat_n_ball.vhd` file
+- Ball bouncing
+  - Ball would not hit the bat if the ball was too close to the wall when hitting the bat
+    - We increased the y-motion of the ball so there would be a more zig-zag pattern, resulting in less balls phasing through the bats
+
+**Timeline:**
+
+The project was completed over the span of two weeks with equal work being done by both parties
