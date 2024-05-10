@@ -27,7 +27,6 @@ To play the game, you will need the following attachments:
 
 Download the following files from this repository to your computer:
 
-- `adc_if.vhd`
 - `bat_n_ball.vhd`
 - `clk_wiz_0_clk_wiz.vhd`
 - `clk_wiz_0.vhd`
