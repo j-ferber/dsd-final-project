@@ -200,6 +200,43 @@ When it came to drawing the bats, we had to add another process to draw the seco
 
 **Ball Movement**
 
+For the ball movement, we edited the "mball" process for inside the bat_n_ball file. From the original file, we had to change the original ball logic to account for the bats being on the sides. Additionally, the movement would have the change off the walls since the left and right wall resulted in the game ending.
+
+- The approach we took for the ball movement is as follows:
+  - If game was restarted with the button, then set the ball_y_motion and ball_x_motion based on the current ball speed. Reset the doubleScore flag and set game_on to be '1'.
+  - If the ball hit the top wall, then the ball_y_motion would be set to a positive ball speed to make it travel downwards.
+  - If the ball hit the bottom wall, then the ball_y-_motion would be set to a negative ball speed to make it travel upwards.
+  - If the ball hit the right wall, which is when player 1 scores, then the score1 count would increase and update the player 1 score. The double hit flag would also be set to '1' to prevent the score from counting more than once.
+  - If the ball hit the left wayy, which is when player 2 scores, then the score2 count would increase and update the player 2 score. The double hit flag would also be set to '1' to prevent the score from counting more than once.
+  - For the bouncing off the bats:
+    - If the auto1 switch was set to '0', which means bat1 is in manual mode, then the ball will have it ball_x_motion set to a positive ball speed to make it move right and away from the bat. This is similar to when auto is set to '0', except the bat is in automatic mode when it moves on its own.
+    - If the auto2 switch was set to '0', which means bat2 is in manual mode, then the ball will have it ball_x_motion set to a negative ball speed to make it move left and away from the bat. This is similar to when auto is set to '0', except the bat is in automatic mode when it moves on its own.
+   
+### `leddec16.vhd`
+
+_The code for this file originated from the `leddec16.vhd` file from Lab 4_
+
+**Initial:**
+
+![image](https://github.com/j-ferber/dsd-final-project/assets/89234087/32adfacc-c01d-470d-8fd6-11fc00470eaf)
+
+![image](https://github.com/j-ferber/dsd-final-project/assets/89234087/f7a459ec-e888-4817-a437-e9637880035e)
+
+![image](https://github.com/j-ferber/dsd-final-project/assets/89234087/7e7eb08b-69e5-4d31-9166-477a46a509de)
+
+---
+
+**Modified:**
+
+![image](https://github.com/j-ferber/dsd-final-project/assets/89234087/c17de3e4-1ecb-4df7-9a84-1a401c1d4ced)
+
+![image](https://github.com/j-ferber/dsd-final-project/assets/89234087/03d1a99d-6743-476b-ba86-d81f81c4b157)
+
+![image](https://github.com/j-ferber/dsd-final-project/assets/89234087/99370f32-3537-44b7-8a81-3c5171e066e0)
+
+For the score display on the board, we edited the behavioral of the leddec16.vhd and the input ports. For the ports we added a data1 and data2 instead of just data. This way data1 contains the score data for player 1 that is passed to the file and data2 contains the score data for player 2. In the behavioral, the assignment for data4 was modified to pass data1 to be in dig spots "110" and "111", which are the two farthest spots to the left. Similarly, data2 was passed to be in dig spots "000" and "001", which are the two farthest spots to the right. This means that only anode spots 0, 1, 6, and 7 were utilized and the rest were commented out as they were unused.
 
 
-## Summary
+## Process Summary
+![image](https://github.com/j-ferber/dsd-final-project/assets/89234087/08970931-fbc5-49d1-9ae9-90984dd05187)
+
