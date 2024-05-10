@@ -7,6 +7,12 @@ Pong on Nexys A7-100T using Vivado
 In **_Pong_**, you control one of the bats and keep the ball away from your side
 
 - **Goal:** Keep the ball from hitting your side of the screen
+- **Playing:** The controls
+  - BTNU and BTND for up and down control for left bat / player 1
+  - Keys 1 and 7 on the keypad for up and down control for right bat / player 2
+  - BTNC to serve the ball and start a new game
+  - SW0-SW4 to alter the speed of the ball when the game starts
+  - SW14-SW15 to toggle the computer control for the left or right bat 
 - **Scoring:** There are two different scores present on the board at once
   - The left score represents the points the person controlling the left bat has scored, which means how many times the ball hit the right side
   - The right score represents the points the person controlling the right bat has scored, meaning the amount of times the ball has hit the left wall
@@ -68,8 +74,6 @@ Image of inputs and outputs to top level file, `pong_2.vhd`
 - KB_col, KB_row: These inputs are passed down to the `keypad.vhd` file to determine which key is currently being pressed on the keypad (10)
 
 ![20240509_213141](https://github.com/j-ferber/dsd-final-project/assets/119906373/21a3f75f-9ce7-4c7a-bbcf-0b667cfae1a7)
-
-## Videos and Images of Program Running
 
 ## Modifications
 
@@ -205,7 +209,7 @@ When it came to drawing the bats, we had to add another process to draw the seco
 For the ball movement, we edited the "mball" process for inside the bat_n_ball file. From the original file, we had to change the original ball logic to account for the bats being on the sides. Additionally, the movement would have the change off the walls since the left and right wall resulted in the game ending.
 
 - The approach we took for the ball movement is as follows:
-  - If game was restarted with the button, then set the ball_y_motion and ball_x_motion based on the current ball speed. Reset the doubleScore flag and set game_on to be '1'.
+  - If game was restarted with the button, then set the ball_y_motion and ball_x_motion based on the current ball speed. Reset the doubleScore flag and set game_on to be '1'. The ball speed was also set based on the current number of switches flipped and their significance, with SW4 causing the greatest increase in speed out of all the switches.
   - If the ball hit the top wall, then the ball_y_motion would be set to a positive ball speed to make it travel downwards.
   - If the ball hit the bottom wall, then the ball_y-_motion would be set to a negative ball speed to make it travel upwards.
   - If the ball hit the right wall, which is when player 1 scores, then the score1 count would increase and update the player 1 score. The double hit flag would also be set to '1' to prevent the score from counting more than once.
